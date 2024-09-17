@@ -1,0 +1,32 @@
+def bubble_sort_swaps(arr, ascending=True):
+    n = len(arr)
+    swap_count = 0
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if (ascending and arr[j] > arr[j+1]) or (not ascending and arr[j] < arr[j+1]):
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swap_count += 1
+    return swap_count
+
+def minimum_swaps_to_beautiful(arr):
+    # Copy the array for sorting
+    arr1 = arr[:]
+    arr2 = arr[:]
+    
+    # Count swaps for ascending order
+    ascending_swaps = bubble_sort_swaps(arr1, ascending=True)
+    
+    # Count swaps for descending order
+    descending_swaps = bubble_sort_swaps(arr2, ascending=False)
+    
+    # Return the minimum of the two
+    return min(ascending_swaps, descending_swaps)
+
+# Input reading
+n = int(input())  # number of elements
+arr = list(map(int, input().split()))  # the array elements
+
+# Calculate and print the result
+result = minimum_swaps_to_beautiful(arr)
+print(result)
+
